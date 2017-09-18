@@ -1,0 +1,65 @@
+{
+  "name": "react-native-navigation-drilldown",
+  "version": "0.0.1",
+  "description": "Drilldown screens to use with react-navigation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "assets": "cp ./src/icons/*.png ./dist/icons",
+    "build": "mkdir -p ./dist/icons | yarn run tsc | yarn run assets",
+    "prepack": "yarn run build",
+    "tsc": "tsc",
+    "tsc:watch": "tsc --watch",
+    "test": "jest"
+  },
+  "keywords": [
+    "react-native",
+    "react-navigation",
+    "navigation",
+    "drilldown"
+  ],
+  "author": "Konstantin Kuznetsov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/doomsower/react-native-navigation-drilldown/issues"
+  },
+  "homepage": "https://github.com/doomsower/react-native-navigation-drilldown#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doomsower/react-native-navigation-drilldown.git"
+  },
+  "devDependencies": {
+    "@types/jest": "^20.0.8",
+    "@types/react-navigation": "^1.0.20",
+    "jest": "^21.0.2",
+    "ts-jest": "^21.0.0",
+    "tslib": "^1.7.1",
+    "tslint": "^5.7.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "tslint-react": "^3.2.0",
+    "typescript": "^2.5.2"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-portal": "*",
+    "react-navigation": "*"
+  },
+  "dependencies": {
+    "lodash.xorby": "^4.7.0",
+    "react-native-platform-touchable": "^1.1.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  }
+}

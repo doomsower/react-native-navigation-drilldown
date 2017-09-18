@@ -1,0 +1,10 @@
+/example
+/src
+/.idea
+/node_modules
+.gitignore
+tsconfig.json
+tslint.json
+yarn.lock
+/yarn-error.log
+*.js.map

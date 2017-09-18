@@ -1,0 +1,34 @@
+{
+	"name": "example",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"rc-start": "yarn run start -- --reset-cache",
+		"clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && yarn cache clean",
+		"clean-start": "yarn run clean && yarn run rc-start",
+		"fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && rm -rf android/build && rm -rf android/app/build && yarn cache clean && yarn",
+		"fresh-start": "yarn run fresh-install && yarn run rc-start",
+		"wml": "wml add ../dist ./src/drilldown && wml start",
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest"
+	},
+	"dependencies": {
+		"lodash.xorby": "^4.7.0",
+		"react": "16.0.0-alpha.12",
+		"react-native": "^0.48.3",
+		"react-native-platform-touchable": "^1.1.1",
+		"react-native-portal": "^1.2.1",
+		"react-navigation": "^1.0.0-beta.11",
+		"recompose": "^0.25.0",
+		"wml": "^0.0.82"
+	},
+	"devDependencies": {
+		"babel-jest": "21.0.2",
+		"babel-preset-react-native": "^4.0.0",
+		"jest": "^21.1.0",
+		"react-test-renderer": "16.0.0-alpha.12"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
+}
