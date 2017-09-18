@@ -55,8 +55,6 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
     if (multi && allowNonLeaves) {
       data = [{ id: options.id, name: options.name }, ...data];
     }
-    console.log('Options', options);
-    console.log('Data', data);
     return (
       <View>
         <FlatList

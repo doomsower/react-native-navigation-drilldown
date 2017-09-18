@@ -84,9 +84,11 @@ export interface DrilldownProps extends DrilldownListProps {
   name: string;
 
   handle?: React.ComponentType<HandleProps>;
+  handleProps?: HandleProps | ((selected?: DrilldownSelection) => HandleProps);
+
   itemView?: React.Component<ItemViewProps>;
+
   doneButton?: React.ComponentType;
-  handleProps?: HandleProps;
 
   style?: StyleProp<ViewStyle>;
 }

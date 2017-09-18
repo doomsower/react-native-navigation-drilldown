@@ -3,9 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import { BlackPortal } from 'react-native-portal';
 import DrilldownList from './DrilldownList';
 import { Handle } from './Handle';
+import Icon from './Icon';
 import { ARROW_RIGHT, CHECK_ICON } from './icons';
 import { DEFAULT_ROUTE_NAME, DrilldownItemProps, DrilldownProps } from './types';
-import Icon from './Icon';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +29,7 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
     } else {
       selectedItem = selected as DrilldownItemProps;
     }
+    const handlePropsObj = (typeof handleProps === 'function') ? handleProps(selected) : handleProps;
     const HandleComponent = handle || Handle;
     const DoneButton = doneButton;
     const topRightButton = multi ? (DoneButton ? <DoneButton /> : <Icon source={CHECK_ICON} />) : undefined;
@@ -38,7 +39,7 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
       <View style={[styles.container, style]}>
         <HandleComponent
           rightIcon={ARROW_RIGHT}
-          {...handleProps}
+          {...handlePropsObj}
           leftIcon={handleIcon}
           title={handleLabel}
           onPress={this.onHandlePress}
