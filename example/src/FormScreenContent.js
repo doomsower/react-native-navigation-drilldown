@@ -26,7 +26,7 @@ const FormScreenContent = ({ navigation, ...props }) => (
       noItemLabel="Please select item"
       name="drilldown1"
       options={options}
-      selected={props.oneItem}
+      value={props.oneItem}
       onChange={props.changeSingleSelection}
       navigate={navigation.navigate}
       goBack={navigation.goBack}
@@ -36,7 +36,7 @@ const FormScreenContent = ({ navigation, ...props }) => (
       name="drilldown2"
       noItemLabel="Please select multiple items"
       options={options}
-      selected={props.manyItems}
+      value={props.manyItems}
       onChange={props.changeMultiSelection}
       navigate={navigation.navigate}
       goBack={navigation.goBack}
@@ -47,7 +47,7 @@ const FormScreenContent = ({ navigation, ...props }) => (
       name="drilldown3"
       noItemLabel="Please select multiple items"
       options={options}
-      selected={props.manyItems2}
+      value={props.manyItems2}
       onChange={props.changeMultiSelection2}
       navigate={navigation.navigate}
       goBack={navigation.goBack}

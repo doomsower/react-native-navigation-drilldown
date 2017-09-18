@@ -20,15 +20,15 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
 
   render() {
     const { name, noItemIcon, noItemLabel, handle, handleProps, style, ...listProps } = this.props;
-    const { multi, selected } = listProps;
+    const { multi, value } = listProps;
     let selectedItem: DrilldownItemProps | null | undefined;
     if (multi) {
-      const items = selected as DrilldownItemProps[];
+      const items = value as DrilldownItemProps[];
       selectedItem = (items && items.length) ? items[0] : null;
     } else {
-      selectedItem = selected as DrilldownItemProps;
+      selectedItem = value as DrilldownItemProps;
     }
-    const handlePropsObj = (typeof handleProps === 'function') ? handleProps(selected) : handleProps;
+    const handlePropsObj = (typeof handleProps === 'function') ? handleProps(value) : handleProps;
     const HandleComponent = handle || Handle;
     const handleIcon = selectedItem ? selectedItem.icon : noItemIcon;
     const handleLabel = selectedItem ? selectedItem.name : noItemLabel;

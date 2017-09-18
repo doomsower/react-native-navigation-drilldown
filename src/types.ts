@@ -21,7 +21,7 @@ export type DrilldownSelection = DrilldownItemProps | DrilldownItemProps[];
 
 export interface DrilldownListProps {
   options: DrilldownItemProps;
-  selected?: DrilldownItemProps[] | DrilldownItemProps;
+  value?: DrilldownItemProps[] | DrilldownItemProps;
   multi?: boolean;
   allowNonLeaves?: boolean;
   onChange?: (items: DrilldownItemProps[] | DrilldownItemProps) => void;

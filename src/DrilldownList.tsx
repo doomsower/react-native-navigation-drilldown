@@ -19,9 +19,9 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   getItemLayout = (data: any, index: number) => ({ length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index });
 
   onItemSelected = (item: DrilldownItemProps) => {
-    const { onChange, selected, multi, allowNonLeaves, goBack } = this.props;
+    const { onChange, value, multi, allowNonLeaves, goBack } = this.props;
     if (onChange) {
-      onChange(handleSelection(item, selected, !!multi, !!allowNonLeaves));
+      onChange(handleSelection(item, value, !!multi, !!allowNonLeaves));
     }
     if (!multi) {
       goBack(this.props.rootDrilldownScreenKey);
@@ -41,7 +41,7 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
       <ItemView
         key={item.id}
         item={item}
-        selected={this.props.selected}
+        selected={this.props.value}
         onSelect={this.onItemSelected}
         onDrill={this.onItemDrilled}
       />
@@ -59,7 +59,7 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
       <View>
         <FlatList
           data={data}
-          extraData={this.props.selected}
+          extraData={this.props.value}
           getItemLayout={this.getItemLayout}
           renderItem={this.renderListItem}
           keyExtractor={KEY_EXTRACTOR}
