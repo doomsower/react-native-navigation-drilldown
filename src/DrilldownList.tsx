@@ -29,10 +29,10 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   };
 
   onItemDrilled = (drilledItem: DrilldownItemProps) => {
-    const { navigate, rootDrilldownScreenKey, routeName = DEFAULT_ROUTE_NAME } = this.props;
+    const { multi, navigate, rootDrilldownScreenKey, routeName = DEFAULT_ROUTE_NAME } = this.props;
     this.setState(
       { drilledItem },
-      () => navigate(routeName, { drilldownItemId: drilledItem.id, rootDrilldownScreenKey }),
+      () => navigate(routeName, { drilldownItemId: drilledItem.id, rootDrilldownScreenKey, multi }),
     );
   };
 

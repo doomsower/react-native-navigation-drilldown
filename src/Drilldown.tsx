@@ -3,8 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { BlackPortal } from 'react-native-portal';
 import DrilldownList from './DrilldownList';
 import { Handle } from './Handle';
-import Icon from './Icon';
-import { ARROW_RIGHT, CHECK_ICON } from './icons';
+import { ARROW_RIGHT } from './icons';
 import { DEFAULT_ROUTE_NAME, DrilldownItemProps, DrilldownProps } from './types';
 
 const styles = StyleSheet.create({
@@ -15,12 +14,12 @@ const styles = StyleSheet.create({
 
 export class Drilldown extends React.PureComponent<DrilldownProps, any> {
   onHandlePress = () => {
-    const { name, navigate, routeName = DEFAULT_ROUTE_NAME } = this.props;
-    navigate(routeName, { rootPortalName: name });
+    const { multi, name, navigate, routeName = DEFAULT_ROUTE_NAME } = this.props;
+    navigate(routeName, { rootPortalName: name, multi });
   };
 
   render() {
-    const { name, noItemIcon, noItemLabel, doneButton, handle, handleProps, style, ...listProps } = this.props;
+    const { name, noItemIcon, noItemLabel, handle, handleProps, style, ...listProps } = this.props;
     const { multi, selected } = listProps;
     let selectedItem: DrilldownItemProps | null | undefined;
     if (multi) {
@@ -31,8 +30,6 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
     }
     const handlePropsObj = (typeof handleProps === 'function') ? handleProps(selected) : handleProps;
     const HandleComponent = handle || Handle;
-    const DoneButton = doneButton;
-    const topRightButton = multi ? (DoneButton ? <DoneButton /> : <Icon source={CHECK_ICON} />) : undefined;
     const handleIcon = selectedItem ? selectedItem.icon : noItemIcon;
     const handleLabel = selectedItem ? selectedItem.name : noItemLabel;
     return (
@@ -46,9 +43,6 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
         />
         <BlackPortal name={`drilldownPortal_${name}`}>
           <DrilldownList {...listProps} />
-        </BlackPortal>
-        <BlackPortal name={`drilldownPortal_${name}_done_button`}>
-          {topRightButton}
         </BlackPortal>
       </View>
     );

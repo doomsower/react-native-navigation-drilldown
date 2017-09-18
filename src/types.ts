@@ -88,7 +88,5 @@ export interface DrilldownProps extends DrilldownListProps {
 
   itemView?: React.Component<ItemViewProps>;
 
-  doneButton?: React.ComponentType;
-
   style?: StyleProp<ViewStyle>;
 }
