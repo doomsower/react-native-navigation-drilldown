@@ -5,13 +5,31 @@ import addCategoriesAsLeaves from './addCategoriesAsLeaves';
 import DrilldownList from './DrilldownList';
 import { Handle } from './Handle';
 import { ARROW_RIGHT } from './icons';
-import { DEFAULT_ROUTE_NAME, DrilldownItemProps, DrilldownProps } from './types';
+import { DEFAULT_ROUTE_NAME, DrilldownItemProps, DrilldownProps, DrilldownSelection, IconSource } from './types';
 
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'stretch',
   },
 });
+
+const getTitle = (noSelectionTitle: string) => (selection?: DrilldownSelection) => {
+  if (!selection || Array.isArray(selection) && (selection as any).length === 0) {
+    return noSelectionTitle;
+  } else if (Array.isArray(selection)) {
+    return `${selection[0].name} (+ ${selection.length} more)`;
+  }
+  return selection.name;
+};
+
+const getIcon = (noSelectionIcon?: IconSource) => (selection?: DrilldownSelection) => {
+  if (!selection || Array.isArray(selection) && (selection as any).length === 0) {
+    return noSelectionIcon;
+  } else if (Array.isArray(selection)) {
+    return selection[0].icon;
+  }
+  return selection.icon;
+};
 
 export class Drilldown extends React.PureComponent<DrilldownProps, any> {
   options: DrilldownItemProps;
@@ -34,19 +52,12 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
   };
 
   render() {
-    const { name, noItemIcon, noItemLabel, handle, handleProps, style, ...listProps } = this.props;
-    const { multi, value } = listProps;
-    let selectedItem: DrilldownItemProps | null | undefined;
-    if (multi) {
-      const items = value as DrilldownItemProps[];
-      selectedItem = (items && items.length) ? items[0] : null;
-    } else {
-      selectedItem = value as DrilldownItemProps;
-    }
+    const { name, icon, label, handle, handleProps, style, ...listProps } = this.props;
+    const { value } = listProps;
     const handlePropsObj = (typeof handleProps === 'function') ? handleProps(value) : handleProps;
     const HandleComponent = handle || Handle;
-    const handleIcon = selectedItem ? selectedItem.icon : noItemIcon;
-    const handleLabel = selectedItem ? selectedItem.name : noItemLabel;
+    const handleIcon = typeof icon === 'function' ? icon(value) : getIcon(icon)(value);
+    const handleLabel = typeof label === 'function' ? label(value) : getTitle(label)(value);
     return (
       <View style={[styles.container, style]}>
         <HandleComponent

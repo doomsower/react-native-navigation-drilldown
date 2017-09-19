@@ -10,17 +10,19 @@ import { NavigationAction, NavigationParams } from 'react-navigation';
 
 export const DEFAULT_ROUTE_NAME = 'DrilldownRoute';
 
+export type IconSource = string | ImageURISource;
+
 export interface DrilldownItemProps {
   id: string;
-  icon?: string | ImageURISource;
+  icon?: IconSource;
   name: string;
   children?: DrilldownItemProps[];
 }
 
 export type DrilldownSelection = DrilldownItemProps | DrilldownItemProps[];
 
-export type ItemMapper = (item: {name: string, icon?: string | ImageURISource; }) =>
-  {name: string, icon?: string | ImageURISource; };
+export type ItemMapper = (item: {name: string, icon?: IconSource; }) =>
+  {name: string, icon?: IconSource; };
 
 export interface DrilldownListProps {
   options: DrilldownItemProps;
@@ -82,9 +84,25 @@ export interface ItemViewProps {
 }
 
 export interface DrilldownProps extends DrilldownListProps {
-  noItemLabel: string;
-  noItemIcon?: string;
+  /**
+   * If string, this label string will be rendered when nothing is selected
+   * If function, this function allows to customize string that be rendered as for selection
+   */
+  label: string | ((selection?: DrilldownSelection) => string);
+  /**
+   * If function, this function allows to customize icon that be rendered as for selection
+   * If string/Image source, this icon will be rendered when nothing is selected
+   */
+  icon?: IconSource | ((selection?: DrilldownSelection) => IconSource);
+  /**
+   * Name is used to distinguish different drilldowns.
+   * Also comes handy when using with redux-form.
+   */
   name: string;
+  /**
+   * Works when allowNonLeaves is set to true
+   * Use this to render custom icon/title when rendering category as leaf
+   */
   nonLeaveMapper?: ItemMapper;
 
   handle?: React.ComponentType<HandleProps>;
