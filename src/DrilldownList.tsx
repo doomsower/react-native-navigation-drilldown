@@ -37,28 +37,26 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   };
 
   renderListItem = ({ item }: {item: DrilldownItemProps}) => {
+    const { options } = this.props;
+    const isSelf = item.id === options.id;
+    const isLeaf = isSelf || !item.children;
     return (
       <ItemView
         key={item.id}
         item={item}
+        isLeaf={isLeaf}
         selected={this.props.value}
-        onSelect={this.onItemSelected}
-        onDrill={this.onItemDrilled}
+        onPress={isLeaf ? this.onItemSelected : this.onItemDrilled}
       />
     );
   };
 
   render(): React.ReactElement<any> {
     const { drilledItem } = this.state;
-    const { allowNonLeaves, multi, options } = this.props;
-    let data = options.children!;
-    if (multi && allowNonLeaves) {
-      data = [{ id: options.id, name: options.name }, ...data];
-    }
     return (
       <View>
         <FlatList
-          data={data}
+          data={this.props.options.children!}
           extraData={this.props.value}
           getItemLayout={this.getItemLayout}
           renderItem={this.renderListItem}

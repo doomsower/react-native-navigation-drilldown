@@ -1,13 +1,13 @@
 {
   "name": "react-native-navigation-drilldown",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Drilldown screens to use with react-navigation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "assets": "cp ./src/icons/*.png ./dist/icons",
-    "build": "mkdir -p ./dist/icons | yarn run tsc | yarn run assets",
-    "prepack": "yarn run build",
+    "build": "mkdir -p ./dist/icons | npm run tsc | npm run assets",
+    "prepack": "npm run build",
     "tsc": "tsc",
     "tsc:watch": "tsc --watch",
     "test": "jest"
@@ -30,9 +30,15 @@
   },
   "devDependencies": {
     "@types/jest": "^20.0.8",
+    "@types/react": "^16.0.5",
+    "@types/react-native": "^0.48.6",
     "@types/react-navigation": "^1.0.20",
     "jest": "^21.0.2",
-    "ts-jest": "^21.0.0",
+    "react": "^15.6.1",
+    "react-native": "^0.48.3",
+    "react-native-portal": "^1.2.1",
+    "react-navigation": "^1.0.0-beta.11",
+    "ts-jest": "^21.0.1",
     "tslib": "^1.7.1",
     "tslint": "^5.7.0",
     "tslint-eslint-rules": "^4.1.1",
@@ -55,6 +61,13 @@
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+    "testPathIgnorePatterns": [
+      "options.ts"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example/",
+      "<rootDir>/dist/"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",

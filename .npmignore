@@ -8,3 +8,5 @@ tslint.json
 yarn.lock
 /yarn-error.log
 *.js.map
+/dist/__tests__
+/package-lock.json

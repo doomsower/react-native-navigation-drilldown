@@ -19,6 +19,9 @@ export interface DrilldownItemProps {
 
 export type DrilldownSelection = DrilldownItemProps | DrilldownItemProps[];
 
+export type ItemMapper = (item: {name: string, icon?: string | ImageURISource; }) =>
+  {name: string, icon?: string | ImageURISource; };
+
 export interface DrilldownListProps {
   options: DrilldownItemProps;
   value?: DrilldownItemProps[] | DrilldownItemProps;
@@ -57,9 +60,9 @@ export interface HandleProps {
 
 export interface ItemViewProps {
   item: DrilldownItemProps;
+  isLeaf: boolean;
   selected?: DrilldownSelection;
-  onSelect: (item: DrilldownItemProps | null) => void;
-  onDrill: (item: DrilldownItemProps) => void;
+  onPress: (item: DrilldownItemProps) => void;
 
   contentStyle?: StyleProp<ViewStyle>;
   contentProps?: ImageBackgroundProperties;
@@ -82,6 +85,7 @@ export interface DrilldownProps extends DrilldownListProps {
   noItemLabel: string;
   noItemIcon?: string;
   name: string;
+  nonLeaveMapper?: ItemMapper;
 
   handle?: React.ComponentType<HandleProps>;
   handleProps?: HandleProps | ((selected?: DrilldownSelection) => HandleProps);

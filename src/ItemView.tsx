@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Handle } from './Handle';
 import { ARROW_RIGHT, CHECK_ICON, DONE_ALL_ICON } from './icons';
-import isSelected from './isSelected';
+import includesSelected from './includesSelected';
 import { ItemViewProps } from './types';
 
 export default class ItemView extends React.PureComponent<ItemViewProps> {
@@ -20,17 +20,13 @@ export default class ItemView extends React.PureComponent<ItemViewProps> {
   }
 
   updateSelection = ({ item, selected = [] }: ItemViewProps) => {
-    this.leafSelected = isSelected(item, selected);
+    this.leafSelected = includesSelected(item, selected);
     this.selfSelected = Array.isArray(selected) ? selected.some(i => i.id === item.id) : (selected.id === item.id);
   };
 
   onPress = () => {
-    const { item, onDrill, onSelect } = this.props;
-    if (item.children) {
-      onDrill(item);
-    } else {
-      onSelect(item);
-    }
+    const { item, onPress } = this.props;
+    onPress(item);
   };
 
   renderContent = () => {
@@ -56,6 +52,7 @@ export default class ItemView extends React.PureComponent<ItemViewProps> {
   render() {
     const {
       item,
+      isLeaf,
       contentStyle,
       contentProps,
       renderContent,
@@ -75,7 +72,7 @@ export default class ItemView extends React.PureComponent<ItemViewProps> {
       undefined :
       (this.selfSelected ?
         CHECK_ICON :
-        (this.leafSelected ? DONE_ALL_ICON : (item.children ? ARROW_RIGHT : undefined))
+          (isLeaf ? undefined : (this.leafSelected ? DONE_ALL_ICON : ARROW_RIGHT))
       );
     return (
       <Handle

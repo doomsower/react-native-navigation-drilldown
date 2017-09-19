@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StackNavigator, TabNavigator } from "react-navigation";
 import WelcomeScreen from "./WelcomeScreen";
 import FormScreen from "./FormScreen";
-import { DEFAULT_ROUTE_NAME, DrilldownScreen } from "./drilldown";
+import { DEFAULT_ROUTE_NAME, createDrilldownScreen } from "./drilldown";
 import { PortalProvider } from 'react-native-portal';
 
 const HomeScreen = TabNavigator({
@@ -16,7 +16,12 @@ HomeScreen.navigationOptions = {
 
 const RootNavigator = StackNavigator({
   Home: { screen: HomeScreen },
-  [DEFAULT_ROUTE_NAME]: { screen: DrilldownScreen, navigationOptions: { title: 'Select fruit or pet' } },
+  [DEFAULT_ROUTE_NAME]: {
+    screen: createDrilldownScreen(),
+    navigationOptions: {
+      title: 'Select fruit or pet',
+    },
+  },
 });
 
 const App = () => (

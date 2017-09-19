@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": "1_1",
+              "name": "Apples",
+            },
+            Object {
+              "id": "1_2",
+              "name": "Pears",
+            },
+            Object {
+              "id": "1_3",
+              "name": "Oranges",
+            },
+          ],
+          "id": "1",
+          "name": "Fruits",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "id": "2_1",
+              "name": "Dogs",
+            },
+            Object {
+              "id": "2_2",
+              "name": "Cats",
+            },
+            Object {
+              "id": "2_3",
+              "name": "Hamsters",
+            },
+          ],
+          "id": "2",
+          "name": "Pets",
+        },
+      ],
+      "id": "0",
+      "name": "All categories",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": "1_1",
+              "name": "Apples",
+            },
+            Object {
+              "id": "1_2",
+              "name": "Pears",
+            },
+            Object {
+              "id": "1_3",
+              "name": "Oranges",
+            },
+          ],
+          "id": "1",
+          "name": "Fruits",
+        },
+        Object {
+          "id": "1_1",
+          "name": "Apples",
+        },
+        Object {
+          "id": "1_2",
+          "name": "Pears",
+        },
+        Object {
+          "id": "1_3",
+          "name": "Oranges",
+        },
+      ],
+      "id": "1",
+      "name": "Fruits",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "id": "2_1",
+              "name": "Dogs",
+            },
+            Object {
+              "id": "2_2",
+              "name": "Cats",
+            },
+            Object {
+              "id": "2_3",
+              "name": "Hamsters",
+            },
+          ],
+          "id": "2",
+          "name": "Pets",
+        },
+        Object {
+          "id": "2_1",
+          "name": "Dogs",
+        },
+        Object {
+          "id": "2_2",
+          "name": "Cats",
+        },
+        Object {
+          "id": "2_3",
+          "name": "Hamsters",
+        },
+      ],
+      "id": "2",
+      "name": "Pets",
+    },
+  ],
+  "id": "0",
+  "name": "All categories",
+}
+`;
