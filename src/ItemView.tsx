@@ -14,14 +14,14 @@ export default class ItemView extends React.PureComponent<ItemViewProps> {
   }
 
   componentWillReceiveProps(nextProps: ItemViewProps) {
-    if (nextProps.item !== this.props.item || nextProps.selected !== this.props.selected) {
+    if (nextProps.item !== this.props.item || nextProps.selection !== this.props.selection) {
       this.updateSelection(nextProps);
     }
   }
 
-  updateSelection = ({ item, selected = [] }: ItemViewProps) => {
-    this.leafSelected = includesSelected(item, selected);
-    this.selfSelected = Array.isArray(selected) ? selected.some(i => i.id === item.id) : (selected.id === item.id);
+  updateSelection = ({ item, selection = [] }: ItemViewProps) => {
+    this.leafSelected = includesSelected(item, selection);
+    this.selfSelected = Array.isArray(selection) ? selection.some(i => i.id === item.id) : (selection.id === item.id);
   };
 
   onPress = () => {

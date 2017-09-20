@@ -39,7 +39,10 @@ export class Handle extends React.PureComponent<HandleProps> {
   renderLeftIcon = () => {
     const { leftIcon, leftIconStyle, leftIconProps, renderLeftIcon } = this.props;
     if (renderLeftIcon) {
-      return renderLeftIcon(leftIcon);
+      return React.cloneElement(
+        renderLeftIcon(leftIcon),
+        { ...leftIconProps, style: [leftIconProps && leftIconProps.style, leftIconStyle] },
+      );
     } else if (leftIcon) {
       const source = typeof leftIcon === 'string' ? { uri: leftIcon } : leftIcon;
       return (
@@ -52,7 +55,10 @@ export class Handle extends React.PureComponent<HandleProps> {
   renderTitle = () => {
     const { title, titleStyle, titleProps, renderTitle } = this.props;
     if (renderTitle) {
-      return renderTitle();
+      return React.cloneElement(
+        renderTitle(),
+        { ...titleProps, style: [titleProps && titleProps.style, titleStyle] },
+      );
     }
     return (
       <Text {...titleProps} style={[styles.wideText, titleStyle]}>{title}</Text>
@@ -67,7 +73,10 @@ export class Handle extends React.PureComponent<HandleProps> {
       renderRightIcon,
     } = this.props;
     if (renderRightIcon) {
-      return renderRightIcon(rightIcon);
+      return React.cloneElement(
+        renderRightIcon(rightIcon),
+        { ...rightIconProps, style: [rightIconProps && rightIconProps.style, rightIconStyle] },
+      );
     } else if (rightIcon) {
       const source = typeof rightIcon === 'string' ? { uri: rightIcon } : rightIcon;
       return (

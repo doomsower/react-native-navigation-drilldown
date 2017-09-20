@@ -32,6 +32,8 @@ export interface DrilldownListProps {
   onChange?: (items: DrilldownItemProps[] | DrilldownItemProps) => void;
   routeName?: string;
   rootDrilldownScreenKey?: string;
+  itemView?: React.ComponentType<ItemViewProps>;
+  itemViewProps?: ItemStyleProps;
   // Navigation
   navigate: (routeName: string, params?: NavigationParams, action?: NavigationAction) => boolean;
   goBack: (routeKey?: (string | null)) => boolean;
@@ -60,12 +62,7 @@ export interface HandleProps {
   onPress?: () => void;
 }
 
-export interface ItemViewProps {
-  item: DrilldownItemProps;
-  isLeaf: boolean;
-  selected?: DrilldownSelection;
-  onPress: (item: DrilldownItemProps) => void;
-
+export interface ItemStyleProps {
   contentStyle?: StyleProp<ViewStyle>;
   contentProps?: ImageBackgroundProperties;
   renderContent?: (item: DrilldownItemProps, selfSelected: boolean, leafSelected: boolean) => React.ReactElement<any>;
@@ -81,6 +78,13 @@ export interface ItemViewProps {
   rightIconStyle?: StyleProp<ViewStyle>;
   rightIconProps?: ImageBackgroundProperties;
   renderRightIcon?: (item: DrilldownItemProps, selfSelected: boolean, leafSelected: boolean) => React.ReactElement<any>;
+}
+
+export interface ItemViewProps extends ItemStyleProps {
+  item: DrilldownItemProps;
+  isLeaf: boolean;
+  selection?: DrilldownSelection;
+  onPress: (item: DrilldownItemProps) => void;
 }
 
 export interface DrilldownProps extends DrilldownListProps {
@@ -107,8 +111,6 @@ export interface DrilldownProps extends DrilldownListProps {
 
   handle?: React.ComponentType<HandleProps>;
   handleProps?: HandleProps | ((selected?: DrilldownSelection) => HandleProps);
-
-  itemView?: React.Component<ItemViewProps>;
 
   style?: StyleProp<ViewStyle>;
 }

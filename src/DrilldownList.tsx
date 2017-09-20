@@ -37,15 +37,17 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   };
 
   renderListItem = ({ item }: {item: DrilldownItemProps}) => {
-    const { options } = this.props;
+    const { itemView, itemViewProps, options } = this.props;
     const isSelf = item.id === options.id;
     const isLeaf = isSelf || !item.children;
+    const ItemViewComponent = itemView || ItemView;
     return (
-      <ItemView
+      <ItemViewComponent
+        {...itemViewProps}
         key={item.id}
         item={item}
         isLeaf={isLeaf}
-        selected={this.props.value}
+        selection={this.props.value}
         onPress={isLeaf ? this.onItemSelected : this.onItemDrilled}
       />
     );
