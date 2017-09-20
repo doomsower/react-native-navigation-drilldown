@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { WhitePortal } from 'react-native-portal';
 import Icon from './Icon';
 import { CHECK_ICON } from './icons';
@@ -15,6 +15,7 @@ export interface DrilldownScreenParams {
 
 export interface DrilldownScreenOptions {
   HeaderRight?: React.ComponentType;
+  screenStyle?: StyleProp<ViewStyle>;
 }
 
 const DefaultHeaderRight = () => <Icon source={CHECK_ICON} />;
@@ -29,7 +30,7 @@ export const createDrilldownScreen = (options: DrilldownScreenOptions = {}) => {
     const portalName = params ? (params.drilldownItemId || params.rootPortalName) : 'root';
     const rootDrilldownScreenKey = (params && params.rootDrilldownScreenKey) || navigation.state.key;
     return (
-      <View style={StyleSheet.absoluteFill}>
+      <View style={[StyleSheet.absoluteFill, options.screenStyle]}>
         <WhitePortal name={`drilldownPortal_${portalName}`} childrenProps={{ rootDrilldownScreenKey }} />
       </View>
     );
