@@ -17,7 +17,7 @@ const getTitle = (noSelectionTitle: string) => (selection?: DrilldownSelection) 
   if (!selection || Array.isArray(selection) && (selection as any).length === 0) {
     return noSelectionTitle;
   } else if (Array.isArray(selection)) {
-    return `${selection[0].name} (+ ${selection.length} more)`;
+    return selection.length > 1 ? `${selection[0].name} (+ ${selection.length - 1} more)` : selection[0].name;
   }
   return selection.name;
 };
