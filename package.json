@@ -1,6 +1,6 @@
 {
   "name": "react-native-navigation-drilldown",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Drilldown screens to use with react-navigation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
