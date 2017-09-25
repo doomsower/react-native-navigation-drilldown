@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { WhitePortal } from 'react-native-portal';
-import { StackNavigatorConfig, TabNavigatorConfig } from 'react-navigation';
+import { NavigationStackScreenOptions, NavigationTabScreenOptions } from 'react-navigation';
 import Icon from './Icon';
 import { CHECK_ICON } from './icons';
 import MultiselectDone from './MultiselectDone';
@@ -17,7 +17,7 @@ export interface DrilldownScreenParams {
 export interface DrilldownScreenOptions {
   HeaderRight?: React.ComponentType;
   screenStyle?: StyleProp<ViewStyle>;
-  navigationOptions?: StackNavigatorConfig & TabNavigatorConfig;
+  navigationOptions?: NavigationStackScreenOptions & NavigationTabScreenOptions;
 }
 
 const DefaultHeaderRight = () => <Icon source={CHECK_ICON} />;
