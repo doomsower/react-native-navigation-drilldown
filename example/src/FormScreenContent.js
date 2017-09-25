@@ -23,7 +23,7 @@ const FormScreenContent = ({ navigation, ...props }) => (
       Welcome to Form Example!
     </Text>
     <Drilldown
-      noItemLabel="Please select item"
+      label="Please select item"
       name="drilldown1"
       options={options}
       value={props.oneItem}
@@ -34,7 +34,7 @@ const FormScreenContent = ({ navigation, ...props }) => (
     <Drilldown
       multi
       name="drilldown2"
-      noItemLabel="Please select multiple items"
+      label="Please select multiple items"
       options={options}
       value={props.manyItems}
       onChange={props.changeMultiSelection}
@@ -45,7 +45,7 @@ const FormScreenContent = ({ navigation, ...props }) => (
       multi
       allowNonLeaves
       name="drilldown3"
-      noItemLabel="Please select multiple items"
+      label="Please select multiple items"
       options={options}
       value={props.manyItems2}
       onChange={props.changeMultiSelection2}
