@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { BlackPortal } from 'react-native-portal';
-import addCategoriesAsLeaves from './addCategoriesAsLeaves';
 import DrilldownList from './DrilldownList';
 import { Handle } from './Handle';
 import { ARROW_RIGHT } from './icons';
-import { DEFAULT_ROUTE_NAME, DrilldownItemProps, DrilldownProps, DrilldownSelection, IconSource } from './types';
+import { DEFAULT_ROUTE_NAME, DrilldownProps, DrilldownSelection, IconSource } from './types';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,19 +31,6 @@ const getIcon = (noSelectionIcon?: IconSource) => (selection?: DrilldownSelectio
 };
 
 export class Drilldown extends React.PureComponent<DrilldownProps, any> {
-  options: DrilldownItemProps;
-
-  constructor(props: DrilldownProps) {
-    super(props);
-    this.options = this.updateInnerOptions(props);
-  }
-
-  componentWillReceiveProps(nextProps: DrilldownProps) {
-    const { options, multi, allowNonLeaves } = nextProps;
-    if (options !== nextProps.options || allowNonLeaves !== nextProps.allowNonLeaves || multi !== nextProps.multi) {
-      this.options = this.updateInnerOptions(nextProps);
-    }
-  }
 
   onHandlePress = () => {
     const { multi, name, navigate, routeName = DEFAULT_ROUTE_NAME } = this.props;
@@ -68,13 +54,9 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
           onPress={this.onHandlePress}
         />
         <BlackPortal name={`drilldownPortal_${name}`}>
-          <DrilldownList {...listProps} options={this.options} />
+          <DrilldownList {...listProps} />
         </BlackPortal>
       </View>
     );
   }
-
-  private updateInnerOptions = ({ options, multi, allowNonLeaves, nonLeaveMapper }: DrilldownProps) => {
-    return (multi && allowNonLeaves) ? addCategoriesAsLeaves(options, nonLeaveMapper) : options;
-  };
 }

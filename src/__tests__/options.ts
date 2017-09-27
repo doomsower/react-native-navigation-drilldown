@@ -8,16 +8,18 @@ export const pears = {
   name: 'Pears',
 };
 
+export const oranges = {
+  id: '1_3',
+  name: 'Oranges',
+};
+
 export const fruits = {
   id: '1',
   name: 'Fruits',
   children: [
     apples,
     pears,
-    {
-      id: '1_3',
-      name: 'Oranges',
-    },
+    oranges,
   ],
 };
 
@@ -26,28 +28,36 @@ export const notInTree = {
   name: 'Fruits',
 };
 
+export const dogs = {
+  id: '2_1',
+  name: 'Dogs',
+};
+
+export const cats = {
+  id: '2_2',
+  name: 'Cats',
+};
+
+export const hamsters = {
+  id: '2_3',
+  name: 'Hamsters',
+};
+
+export const pets = {
+  id: '2',
+  name: 'Pets',
+  children: [
+    dogs,
+    cats,
+    hamsters,
+  ],
+};
+
 export const allOptions = {
   id: '0',
-  name: 'All categories',
+  name: 'Categories',
   children: [
     fruits,
-    {
-      id: '2',
-      name: 'Pets',
-      children: [
-        {
-          id: '2_1',
-          name: 'Dogs',
-        },
-        {
-          id: '2_2',
-          name: 'Cats',
-        },
-        {
-          id: '2_3',
-          name: 'Hamsters',
-        },
-      ],
-    },
+    pets,
   ],
 };

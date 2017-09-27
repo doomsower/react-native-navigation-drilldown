@@ -25,17 +25,56 @@ export type ItemMapper = (item: {name: string, icon?: IconSource; }) =>
   {name: string, icon?: IconSource; };
 
 export interface DrilldownListProps {
+  /**
+   * Possible values tree
+   */
   options: DrilldownItemProps;
+  /**
+   * Selected item or undefined
+   * Or flat array of selected items if multi is true
+   */
   value?: DrilldownItemProps[] | DrilldownItemProps;
+  /**
+   * Enables multiselection
+   */
   multi?: boolean;
-  allowNonLeaves?: boolean;
+  /**
+   * If true, lists will contain additional item to select/deselect whole category
+   */
+  displayCategoryToggles?: boolean;
+  /**
+   * Works when displayCategoryToggles is set to true
+   * Use this to render custom icon/title when rendering category toggle
+   */
+  nonLeafMapper?: ItemMapper;
+  /**
+   * Fired when selection changes
+   * @param {DrilldownItemProps[] | DrilldownItemProps} items
+   */
   onChange?: (items: DrilldownItemProps[] | DrilldownItemProps) => void;
+  /**
+   * react-navigation routeName of DrilldownScreen
+   */
   routeName?: string;
+  /**
+   * used internally, do not set this
+   */
   rootDrilldownScreenKey?: string;
+  /**
+   * Custom component for list item
+   */
   itemView?: React.ComponentType<ItemViewProps>;
+  /**
+   * Item view props to be used with default or custom item view component
+   */
   itemViewProps?: ItemStyleProps;
-  // Navigation
+  /**
+   * Pass navigate function from react-navigation
+   */
   navigate: (routeName: string, params?: NavigationParams, action?: NavigationAction) => boolean;
+  /**
+   * Pass goBack function from react-navigation
+   */
   goBack: (routeKey?: (string | null)) => boolean;
 }
 
@@ -83,7 +122,8 @@ export interface ItemStyleProps {
 export interface ItemViewProps extends ItemStyleProps {
   item: DrilldownItemProps;
   isLeaf: boolean;
-  selection?: DrilldownSelection;
+  selfSelected: boolean;
+  subtreeSelected: boolean;
   onPress: (item: DrilldownItemProps) => void;
 }
 
@@ -103,14 +143,18 @@ export interface DrilldownProps extends DrilldownListProps {
    * Also comes handy when using with redux-form.
    */
   name: string;
-  /**
-   * Works when allowNonLeaves is set to true
-   * Use this to render custom icon/title when rendering category as leaf
-   */
-  nonLeaveMapper?: ItemMapper;
 
+  /**
+   * Custom handle component
+   */
   handle?: React.ComponentType<HandleProps>;
+  /**
+   * Props to be passed to handle
+   */
   handleProps?: HandleProps | ((selected?: DrilldownSelection) => HandleProps);
 
+  /**
+   * Wrapper view style
+   */
   style?: StyleProp<ViewStyle>;
 }

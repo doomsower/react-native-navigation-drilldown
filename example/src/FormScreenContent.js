@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
   },
 });
 
+const nonLeafMapper = ({ name }) => ({ name: `All ${name.toLowerCase()}` });
+
 const FormScreenContent = ({ navigation, ...props }) => (
   <View style={styles.container}>
     <Text style={styles.welcome}>
@@ -43,7 +45,8 @@ const FormScreenContent = ({ navigation, ...props }) => (
     />
     <Drilldown
       multi
-      allowNonLeaves
+      displayCategoryToggles
+      nonLeafMapper={nonLeafMapper}
       name="drilldown3"
       label="Please select multiple items"
       options={options}

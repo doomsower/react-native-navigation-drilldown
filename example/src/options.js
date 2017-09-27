@@ -1,6 +1,6 @@
 export default {
   id: '0',
-  name: 'All categories',
+  name: 'Categories',
   children: [
     {
       id: '1',

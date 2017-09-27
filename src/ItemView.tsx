@@ -1,28 +1,9 @@
 import * as React from 'react';
 import { Handle } from './Handle';
 import { ARROW_RIGHT, CHECK_ICON, DONE_ALL_ICON } from './icons';
-import includesSelected from './includesSelected';
 import { ItemViewProps } from './types';
 
 export default class ItemView extends React.PureComponent<ItemViewProps> {
-  leafSelected: boolean;
-  selfSelected: boolean;
-
-  constructor(props: ItemViewProps) {
-    super(props);
-    this.updateSelection(props);
-  }
-
-  componentWillReceiveProps(nextProps: ItemViewProps) {
-    if (nextProps.item !== this.props.item || nextProps.selection !== this.props.selection) {
-      this.updateSelection(nextProps);
-    }
-  }
-
-  updateSelection = ({ item, selection = [] }: ItemViewProps) => {
-    this.leafSelected = includesSelected(item, selection);
-    this.selfSelected = Array.isArray(selection) ? selection.some(i => i.id === item.id) : (selection.id === item.id);
-  };
 
   onPress = () => {
     const { item, onPress } = this.props;
@@ -30,29 +11,31 @@ export default class ItemView extends React.PureComponent<ItemViewProps> {
   };
 
   renderContent = () => {
-    const { item, renderContent } = this.props;
-    return renderContent!(item, this.selfSelected, this.leafSelected);
+    const { item, renderContent, selfSelected, subtreeSelected } = this.props;
+    return renderContent!(item, selfSelected, subtreeSelected);
   };
 
   renderTitle = () => {
-    const { item, renderTitle } = this.props;
-    return renderTitle!(item, this.selfSelected, this.leafSelected);
+    const { item, renderTitle, selfSelected, subtreeSelected } = this.props;
+    return renderTitle!(item, selfSelected, subtreeSelected);
   };
 
   renderLeftIcon = () => {
-    const { item, renderLeftIcon } = this.props;
-    return renderLeftIcon!(item, this.selfSelected, this.leafSelected);
+    const { item, renderLeftIcon, selfSelected, subtreeSelected } = this.props;
+    return renderLeftIcon!(item, selfSelected, subtreeSelected);
   };
 
   renderRightIcon = () => {
-    const { item, renderRightIcon } = this.props;
-    return renderRightIcon!(item, this.selfSelected, this.leafSelected);
+    const { item, renderRightIcon, selfSelected, subtreeSelected } = this.props;
+    return renderRightIcon!(item, selfSelected, subtreeSelected);
   };
 
   render() {
     const {
       item,
       isLeaf,
+      selfSelected,
+      subtreeSelected,
       contentStyle,
       contentProps,
       renderContent,
@@ -70,9 +53,9 @@ export default class ItemView extends React.PureComponent<ItemViewProps> {
     const leftIcon = renderLeftIcon ? undefined : item.icon;
     const rightIcon = renderRightIcon ?
       undefined :
-      (this.selfSelected ?
+      (selfSelected ?
         CHECK_ICON :
-          (isLeaf ? undefined : (this.leafSelected ? DONE_ALL_ICON : ARROW_RIGHT))
+          (isLeaf ? undefined : (subtreeSelected ? DONE_ALL_ICON : ARROW_RIGHT))
       );
     return (
       <Handle

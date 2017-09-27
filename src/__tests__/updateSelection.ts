@@ -20,10 +20,4 @@ describe('multiselection mode', () => {
   it('should remove from selection', () => {
     expect(updateSelection(apples, [pears, apples], true)).toEqual([pears]);
   });
-
-  it('should deselect children when category is selected', () => {
-    expect(updateSelection(fruits, [apples, pears], true, true))
-      .toEqual([fruits]);
-  });
-
 });
