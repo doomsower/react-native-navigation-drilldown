@@ -10,7 +10,7 @@ import updateSelection from './updateSelection';
 
 const ITEM_HEIGHT = 48;
 
-const KEY_EXTRACTOR = (item: DrilldownItemProps) => item.id;
+const KEY_EXTRACTOR = (item: DrilldownItemProps) => item.id.toString();
 
 export interface State {
   drilledItem: DrilldownItemProps | null;

@@ -13,7 +13,7 @@ export const DEFAULT_ROUTE_NAME = 'DrilldownRoute';
 export type IconSource = string | ImageURISource;
 
 export interface DrilldownItemProps {
-  id: string;
+  id: string | number;
   icon?: IconSource;
   name: string;
   children?: DrilldownItemProps[];
