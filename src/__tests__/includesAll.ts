@@ -13,10 +13,7 @@ it('should be false for one level deep tree', () => {
   expect(includesAll(fruits, [apples, pears])).toBe(false);
 });
 
-it('should be true for two level deep tree', () => {
-  expect(includesAll(allOptions, [apples, oranges, pears, cats, dogs, hamsters])).toBe(true);
+it('should be false for two level deep tree', () => {
+  expect(includesAll(allOptions, [apples, oranges, pears, cats, dogs, hamsters])).toBe(false);
 });
 
-it('should be false for two level deep tree', () => {
-  expect(includesAll(allOptions, [apples, oranges, cats, dogs, hamsters])).toBe(false);
-});

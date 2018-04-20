@@ -1,16 +1,23 @@
-import differenceBy = require('lodash/differenceBy');
-import unionBy = require('lodash/unionBy');
-import castArray = require('lodash/castArray');
-import flattenLeaves from './flattenLeaves';
-import includesAll from './includesAll';
+import isChildOf from './isChildOf';
 import { DrilldownItemProps, DrilldownSelection } from './types';
 
 function toggleSubtree(subtree: DrilldownItemProps, selection?: DrilldownItemProps[]): DrilldownSelection {
-  const leaves = flattenLeaves(subtree);
-  if (includesAll(subtree, selection)) {
-    return differenceBy(selection, castArray(leaves), 'id');
+  if (!selection) {
+    return [subtree];
   }
-  return unionBy(selection, castArray(leaves), 'id');
+  const filtered: DrilldownItemProps[] = [];
+  let selfFound = false;
+  for (const item of selection) {
+    if (item.id === subtree.id) {
+      selfFound = true;
+    } else if (!isChildOf(item, subtree)) {
+      filtered.push(item);
+    }
+  }
+  if (!selfFound) {
+    filtered.push(subtree);
+  }
+  return filtered.length ? filtered : undefined;
 }
 
 export default toggleSubtree;

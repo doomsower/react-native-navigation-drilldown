@@ -1,6 +1,6 @@
 {
   "name": "react-native-navigation-drilldown",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "description": "Drilldown screens to use with react-navigation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -34,7 +34,7 @@
     "@types/lodash.flatmapdeep": "^4.10.0",
     "@types/react": "^16.0.5",
     "@types/react-native": "^0.52.16",
-    "@types/react-navigation": "^1.0.20",
+    "@types/react-navigation": "^1.5.7",
     "jest": "^22.4.2",
     "react": "^16.2.0",
     "react-native": "^0.54.0",
@@ -54,6 +54,7 @@
     "react-navigation": "*"
   },
   "dependencies": {
+    "babel-jest": "^22.4.3",
     "lodash": "^4.17.4",
     "react-native-platform-touchable": "^1.1.1"
   },

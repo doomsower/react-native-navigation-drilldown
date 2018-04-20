@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FlatList, View } from 'react-native';
 import { BlackPortal } from 'react-native-portal';
-import includesAll from './includesAll';
+import includesItem from './includesItem';
 import includesSelected from './includesSelected';
 import ItemView from './ItemView';
 import toggleSubtree from './toggleSubtree';
@@ -22,9 +22,9 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   getItemLayout = (data: any, index: number) => ({ length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index });
 
   onItemSelected = (item: DrilldownItemProps) => {
-    const { onChange, value, multi, goBack } = this.props;
+    const { onChange, value, multi, goBack, rootOptions } = this.props;
     if (onChange) {
-      onChange(updateSelection(item, value, !!multi));
+      onChange(updateSelection(rootOptions, item, value, !!multi));
     }
     if (!multi) {
       goBack(this.props.rootDrilldownScreenKey);
@@ -50,7 +50,7 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   renderHeader = () => {
     const { itemView, itemViewProps, options, multi, displayCategoryToggles, nonLeafMapper, value } = this.props;
     const ItemViewComponent = itemView || ItemView;
-    const selfSelected = includesAll(options, value);
+    const selfSelected = includesItem(options, value);
     if (!multi || !displayCategoryToggles) {
       return null as any as React.ReactElement<any>;
     }

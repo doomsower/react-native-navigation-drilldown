@@ -5,7 +5,6 @@ import { NavigationStackScreenOptions, NavigationTabScreenOptions } from 'react-
 import Icon from './Icon';
 import { CHECK_ICON } from './icons';
 import MultiselectDone from './MultiselectDone';
-import { StatelessScreen } from './StatelessScreen';
 
 export interface DrilldownScreenParams {
   multi?: boolean;
@@ -29,7 +28,8 @@ export const createDrilldownScreen = (options: DrilldownScreenOptions = {}) => {
     navigationOptions,
   } = options;
 
-  const DrilldownScreen: StatelessScreen<{}, DrilldownScreenParams> = ({ navigation }) => {
+  // NavigationScreenComponent<DrilldownScreenParams>
+  const DrilldownScreen: any = ({ navigation }: any) => {
     const params = navigation.state.params;
     const portalName = params ? (params.drilldownItemId || params.rootPortalName) : 'root';
     const rootDrilldownScreenKey = (params && params.rootDrilldownScreenKey) || navigation.state.key;
@@ -40,7 +40,7 @@ export const createDrilldownScreen = (options: DrilldownScreenOptions = {}) => {
     );
   };
 
-  DrilldownScreen.navigationOptions = ({ navigation }) => {
+  DrilldownScreen.navigationOptions = ({ navigation }: any) => {
     const params = navigation.state.params;
     const rootDrilldownScreenKey = params && params.rootDrilldownScreenKey;
     const multi = !!params && !!params.multi;

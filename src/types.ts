@@ -19,12 +19,12 @@ export interface DrilldownItemProps {
   children?: DrilldownItemProps[];
 }
 
-export type DrilldownSelection = DrilldownItemProps | DrilldownItemProps[];
+export type DrilldownSelection = DrilldownItemProps | DrilldownItemProps[] | undefined;
 
 export type ItemMapper = (item: {name: string, icon?: IconSource; }) =>
   {name: string, icon?: IconSource; };
 
-export interface DrilldownListProps {
+export interface DrilldownBaseProps {
   /**
    * Possible values tree
    */
@@ -33,7 +33,7 @@ export interface DrilldownListProps {
    * Selected item or undefined
    * Or flat array of selected items if multi is true
    */
-  value?: DrilldownItemProps[] | DrilldownItemProps;
+  value?: DrilldownSelection;
   /**
    * Enables multiselection
    */
@@ -51,7 +51,7 @@ export interface DrilldownListProps {
    * Fired when selection changes
    * @param {DrilldownItemProps[] | DrilldownItemProps} items
    */
-  onChange?: (items: DrilldownItemProps[] | DrilldownItemProps) => void;
+  onChange?: (items: DrilldownSelection) => void;
   /**
    * react-navigation routeName of DrilldownScreen
    */
@@ -127,7 +127,11 @@ export interface ItemViewProps extends ItemStyleProps {
   onPress: (item: DrilldownItemProps) => void;
 }
 
-export interface DrilldownProps extends DrilldownListProps {
+export interface DrilldownListProps extends DrilldownBaseProps {
+  rootOptions: DrilldownItemProps;
+}
+
+export interface DrilldownProps extends DrilldownBaseProps {
   /**
    * If string, this label string will be rendered when nothing is selected
    * If function, this function allows to customize string that be rendered as for selection

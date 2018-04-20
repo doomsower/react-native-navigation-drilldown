@@ -54,7 +54,7 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
           onPress={this.onHandlePress}
         />
         <BlackPortal name={`drilldownPortal_${name}`}>
-          <DrilldownList {...listProps} />
+          <DrilldownList {...listProps} rootOptions={listProps.options} />
         </BlackPortal>
       </View>
     );
