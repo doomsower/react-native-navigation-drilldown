@@ -56,7 +56,7 @@ export class Handle extends React.PureComponent<HandleProps> {
     const { title, titleStyle, titleProps, renderTitle } = this.props;
     if (renderTitle) {
       return React.cloneElement(
-        renderTitle(),
+        renderTitle(title),
         { ...titleProps, style: [titleProps && titleProps.style, titleStyle] },
       );
     }
