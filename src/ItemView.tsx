@@ -11,23 +11,23 @@ export default class ItemView extends React.PureComponent<ItemViewProps> {
   };
 
   renderContent = () => {
-    const { item, renderContent, selfSelected, subtreeSelected } = this.props;
-    return renderContent!(item, selfSelected, subtreeSelected);
+    const { item, isLeaf, renderContent, selfSelected, subtreeSelected } = this.props;
+    return renderContent!(item, isLeaf, selfSelected, subtreeSelected);
   };
 
   renderTitle = () => {
-    const { item, renderTitle, selfSelected, subtreeSelected } = this.props;
-    return renderTitle!(item, selfSelected, subtreeSelected);
+    const { item, isLeaf, renderTitle, selfSelected, subtreeSelected } = this.props;
+    return renderTitle!(item, isLeaf, selfSelected, subtreeSelected);
   };
 
   renderLeftIcon = () => {
-    const { item, renderLeftIcon, selfSelected, subtreeSelected } = this.props;
-    return renderLeftIcon!(item, selfSelected, subtreeSelected);
+    const { item, isLeaf, renderLeftIcon, selfSelected, subtreeSelected } = this.props;
+    return renderLeftIcon!(item, isLeaf, selfSelected, subtreeSelected);
   };
 
   renderRightIcon = () => {
-    const { item, renderRightIcon, selfSelected, subtreeSelected } = this.props;
-    return renderRightIcon!(item, selfSelected, subtreeSelected);
+    const { item, isLeaf, renderRightIcon, selfSelected, subtreeSelected } = this.props;
+    return renderRightIcon!(item, isLeaf, selfSelected, subtreeSelected);
   };
 
   render() {

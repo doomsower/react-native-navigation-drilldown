@@ -48,18 +48,17 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   };
 
   renderHeader = () => {
-    const { itemView, itemViewProps, options, multi, displayCategoryToggles, nonLeafMapper, value } = this.props;
+    const { itemView, itemViewProps, options, multi, displayCategoryToggles, value } = this.props;
     const ItemViewComponent = itemView || ItemView;
     const selfSelected = includesItem(options, value);
     if (!multi || !displayCategoryToggles) {
       return null as any as React.ReactElement<any>;
     }
-    const item = nonLeafMapper ? { ...options, ...nonLeafMapper(options) } : options;
     return (
       <ItemViewComponent
         {...itemViewProps}
         isLeaf
-        item={item}
+        item={options}
         selfSelected={selfSelected}
         subtreeSelected={false}
         onPress={this.onHeaderPress}

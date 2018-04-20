@@ -43,11 +43,6 @@ export interface DrilldownBaseProps {
    */
   displayCategoryToggles?: boolean;
   /**
-   * Works when displayCategoryToggles is set to true
-   * Use this to render custom icon/title when rendering category toggle
-   */
-  nonLeafMapper?: ItemMapper;
-  /**
    * Fired when selection changes
    * @param {DrilldownItemProps[] | DrilldownItemProps} items
    */
@@ -104,19 +99,23 @@ export interface HandleProps {
 export interface ItemStyleProps {
   contentStyle?: StyleProp<ViewStyle>;
   contentProps?: ImageBackgroundProperties;
-  renderContent?: (item: DrilldownItemProps, selfSelected: boolean, leafSelected: boolean) => React.ReactElement<any>;
+  renderContent?: (item: DrilldownItemProps, isLeaf: boolean, selfSelected: boolean, leafSelected: boolean) =>
+    React.ReactElement<any>;
 
   leftIconStyle?: StyleProp<ViewStyle>;
   leftIconProps?: ImageBackgroundProperties;
-  renderLeftIcon?: (item: DrilldownItemProps, selfSelected: boolean, leafSelected: boolean) => React.ReactElement<any>;
+  renderLeftIcon?: (item: DrilldownItemProps, isLeaf: boolean, selfSelected: boolean, leafSelected: boolean) =>
+    React.ReactElement<any>;
 
   titleStyle?: StyleProp<TextStyle>;
   titleProps?: Partial<TextProperties>;
-  renderTitle?: (item: DrilldownItemProps, selfSelected: boolean, leafSelected: boolean) => React.ReactElement<any>;
+  renderTitle?: (item: DrilldownItemProps, isLeaf: boolean, selfSelected: boolean, leafSelected: boolean) =>
+    React.ReactElement<any>;
 
   rightIconStyle?: StyleProp<ViewStyle>;
   rightIconProps?: ImageBackgroundProperties;
-  renderRightIcon?: (item: DrilldownItemProps, selfSelected: boolean, leafSelected: boolean) => React.ReactElement<any>;
+  renderRightIcon?: (item: DrilldownItemProps, isLeaf: boolean, selfSelected: boolean, leafSelected: boolean) =>
+    React.ReactElement<any>;
 }
 
 export interface ItemViewProps extends ItemStyleProps {
