@@ -38,7 +38,7 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
   };
 
   render() {
-    const { name, icon, label, handle, handleProps, style, ...listProps } = this.props;
+    const { name, icon, label, handle, handleProps, style, disabled, ...listProps } = this.props;
     const { value } = listProps;
     const handlePropsObj = (typeof handleProps === 'function') ? handleProps(value) : handleProps;
     const HandleComponent = handle || Handle;
@@ -47,6 +47,7 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
     return (
       <View style={[styles.container, style]}>
         <HandleComponent
+          disabled={disabled}
           rightIcon={ARROW_RIGHT}
           {...handlePropsObj}
           leftIcon={handleIcon}

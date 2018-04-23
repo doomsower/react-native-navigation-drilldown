@@ -93,6 +93,7 @@ export interface HandleProps {
   rightIconProps?: ImageBackgroundProperties;
   renderRightIcon?: (icon?: ImageURISource | string) => React.ReactElement<any>;
 
+  disabled?: boolean;
   onPress?: () => void;
 }
 
@@ -160,4 +161,6 @@ export interface DrilldownProps extends DrilldownBaseProps {
    * Wrapper view style
    */
   style?: StyleProp<ViewStyle>;
+
+  disabled?: boolean;
 }

@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     height: 48,
     alignItems: 'center',
   },
+  disabled: {
+    opacity: 0.5,
+  },
 });
 
 export class Handle extends React.PureComponent<HandleProps> {
@@ -37,31 +40,31 @@ export class Handle extends React.PureComponent<HandleProps> {
   };
 
   renderLeftIcon = () => {
-    const { leftIcon, leftIconStyle, leftIconProps, renderLeftIcon } = this.props;
+    const { leftIcon, leftIconStyle, leftIconProps, renderLeftIcon, disabled } = this.props;
     if (renderLeftIcon) {
       return React.cloneElement(
         renderLeftIcon(leftIcon),
-        { ...leftIconProps, style: [leftIconProps && leftIconProps.style, leftIconStyle] },
+        { ...leftIconProps, style: [leftIconProps && leftIconProps.style, leftIconStyle, disabled && styles.disabled] },
       );
     } else if (leftIcon) {
       const source = typeof leftIcon === 'string' ? { uri: leftIcon } : leftIcon;
       return (
-        <Icon wrapperStyle={leftIconStyle} {...leftIconProps} source={source} />
+        <Icon wrapperStyle={[leftIconStyle, disabled && styles.disabled]} {...leftIconProps} source={source} />
       );
     }
     return null;
   };
 
   renderTitle = () => {
-    const { title, titleStyle, titleProps, renderTitle } = this.props;
+    const { title, titleStyle, titleProps, renderTitle, disabled } = this.props;
     if (renderTitle) {
       return React.cloneElement(
         renderTitle(title),
-        { ...titleProps, style: [titleProps && titleProps.style, titleStyle] },
+        { ...titleProps, style: [titleProps && titleProps.style, titleStyle, disabled && styles.disabled] },
       );
     }
     return (
-      <Text {...titleProps} style={[styles.wideText, titleStyle]}>{title}</Text>
+      <Text {...titleProps} style={[styles.wideText, titleStyle, disabled && styles.disabled]}>{title}</Text>
     );
   };
 
@@ -71,16 +74,17 @@ export class Handle extends React.PureComponent<HandleProps> {
       rightIconStyle,
       rightIconProps,
       renderRightIcon,
+      disabled,
     } = this.props;
     if (renderRightIcon) {
       return React.cloneElement(
         renderRightIcon(rightIcon),
-        { ...rightIconProps, style: [rightIconProps && rightIconProps.style, rightIconStyle] },
+        { ...rightIconProps, style: [rightIconProps && rightIconProps.style, rightIconStyle, disabled && styles.disabled] },
       );
     } else if (rightIcon) {
       const source = typeof rightIcon === 'string' ? { uri: rightIcon } : rightIcon;
       return (
-        <Icon wrapperStyle={rightIconStyle} {...rightIconProps} source={source} />
+        <Icon wrapperStyle={[rightIconStyle, disabled && styles.disabled]} {...rightIconProps} source={source} />
       );
     }
     return null;
@@ -88,7 +92,7 @@ export class Handle extends React.PureComponent<HandleProps> {
 
   render() {
     return (
-      <PlatformTouchable onPress={this.props.onPress}>
+      <PlatformTouchable disabled={this.props.disabled} onPress={this.props.onPress}>
         {this.renderContent()}
       </PlatformTouchable>
     );
