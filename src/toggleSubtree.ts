@@ -17,7 +17,7 @@ function toggleSubtree(subtree: DrilldownItemProps, selection?: DrilldownItemPro
   if (!selfFound) {
     filtered.push(subtree);
   }
-  return filtered.length ? filtered : undefined;
+  return filtered.length ? filtered : null;
 }
 
 export default toggleSubtree;

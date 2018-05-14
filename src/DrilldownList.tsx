@@ -17,12 +17,16 @@ export interface State {
 }
 
 export default class DrilldownList extends React.PureComponent<DrilldownListProps, State> {
+  static defaultProps: Partial<DrilldownListProps> = {
+    value: null,
+  };
+
   state: State = { drilledItem: null };
 
   getItemLayout = (data: any, index: number) => ({ length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index });
 
   onItemSelected = (item: DrilldownItemProps) => {
-    const { onChange, value, multi, goBack, rootOptions } = this.props;
+    const { onChange, value = null, multi, goBack, rootOptions } = this.props;
     if (onChange) {
       onChange(updateSelection(rootOptions, item, value, !!multi));
     }
@@ -40,7 +44,7 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   };
 
   onHeaderPress = (item: DrilldownItemProps) => {
-    const { onChange, value } = this.props;
+    const { onChange, value = null } = this.props;
     if (onChange) {
       const newSelection = toggleSubtree(item, value as DrilldownItemProps[]);
       onChange(newSelection);
@@ -48,7 +52,7 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   };
 
   renderHeader = () => {
-    const { itemView, itemViewProps, options, multi, displayCategoryToggles, value } = this.props;
+    const { itemView, itemViewProps, options, multi, displayCategoryToggles, value = null } = this.props;
     const ItemViewComponent = itemView || ItemView;
     const selfSelected = includesItem(options, value);
     if (!multi || !displayCategoryToggles) {
@@ -67,7 +71,7 @@ export default class DrilldownList extends React.PureComponent<DrilldownListProp
   };
 
   renderListItem = ({ item }: {item: DrilldownItemProps}) => {
-    const { itemView, itemViewProps, options, value } = this.props;
+    const { itemView, itemViewProps, options, value = null } = this.props;
     const isSelf = item.id === options.id;
     const isLeaf = isSelf || !item.children;
     const ItemViewComponent = itemView || ItemView;

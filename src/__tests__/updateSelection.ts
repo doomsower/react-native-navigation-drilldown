@@ -4,13 +4,13 @@ import { allOptions, apples, dogs, fruits, oranges, pears, pets } from './option
 describe('single selection mode', () => {
   it('should select', () => {
     expect(updateSelection(allOptions, apples, pears, false)).toEqual(apples);
-    expect(updateSelection(allOptions, apples, undefined, false)).toEqual(apples);
+    expect(updateSelection(allOptions, apples, null, false)).toEqual(apples);
   });
 });
 
 describe('multi selection mode', () => {
   it('should select first', () => {
-    expect(updateSelection(allOptions, apples, undefined, true)).toEqual([apples]);
+    expect(updateSelection(allOptions, apples, null, true)).toEqual([apples]);
   });
 
   it('should add to selection', () => {
@@ -22,7 +22,7 @@ describe('multi selection mode', () => {
   });
 
   it('should remove last item from selection', () => {
-    expect(updateSelection(allOptions, apples, [apples], true)).toEqual(undefined);
+    expect(updateSelection(allOptions, apples, [apples], true)).toEqual(null);
   });
 
   it('should collapse to top level when everything is selected', () => {

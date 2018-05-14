@@ -19,7 +19,7 @@ export interface DrilldownItemProps {
   children?: DrilldownItemProps[];
 }
 
-export type DrilldownSelection = DrilldownItemProps | DrilldownItemProps[] | undefined;
+export type DrilldownSelection = DrilldownItemProps | DrilldownItemProps[] | null;
 
 export type ItemMapper = (item: {name: string, icon?: IconSource; }) =>
   {name: string, icon?: IconSource; };

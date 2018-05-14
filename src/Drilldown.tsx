@@ -31,6 +31,9 @@ const getIcon = (noSelectionIcon?: IconSource) => (selection?: DrilldownSelectio
 };
 
 export class Drilldown extends React.PureComponent<DrilldownProps, any> {
+  static defaultProps: Partial<DrilldownProps> = {
+    value: null,
+  };
 
   onHandlePress = () => {
     const { multi, name, navigate, routeName = DEFAULT_ROUTE_NAME } = this.props;
@@ -39,7 +42,7 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
 
   render() {
     const { name, icon, label, handle, handleProps, style, disabled, ...listProps } = this.props;
-    const { value } = listProps;
+    const { value = null } = listProps;
     const handlePropsObj = (typeof handleProps === 'function') ? handleProps(value) : handleProps;
     const HandleComponent = handle || Handle;
     const handleIcon = typeof icon === 'function' ? icon(value) : getIcon(icon)(value);

@@ -31,7 +31,7 @@ const updateMultiSelection = (options: Item, item: Item, selected: DrilldownSele
     xored.push(item);
   }
   const result = collapseSubtrees(options, xored);
-  return result.length ? result : undefined;
+  return result.length ? result : null;
 };
 
 const collapseSubtrees = (options: Item, selected: Item[]) => {

@@ -39,5 +39,5 @@ it('should select root', () => {
 
 it('should deselect root', () => {
   const newSelection = toggleSubtree(allOptions, [allOptions]);
-  expect(newSelection).toBeUndefined();
+  expect(newSelection).toBeNull();
 });

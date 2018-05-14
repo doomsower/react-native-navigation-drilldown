@@ -7,7 +7,7 @@ describe('single selection mode', () => {
   });
 
   it('should not find when selection undefined', () => {
-    expect(includesSelected(fruits)).toBe(false);
+    expect(includesSelected(fruits, null)).toBe(false);
   });
 
   it('should not find when children selected', () => {
@@ -29,6 +29,6 @@ describe('multiselection mode', () => {
   });
 
   it('should be false when nothing is selected', () => {
-    expect(includesSelected(allOptions)).toBe(false);
+    expect(includesSelected(allOptions, null)).toBe(false);
   });
 });
