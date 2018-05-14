@@ -21,6 +21,10 @@ describe('multi selection mode', () => {
     expect(updateSelection(allOptions, apples, [pears, apples], true)).toEqual([pears]);
   });
 
+  it('should remove last item from selection', () => {
+    expect(updateSelection(allOptions, apples, [apples], true)).toEqual(undefined);
+  });
+
   it('should collapse to top level when everything is selected', () => {
     expect(updateSelection(allOptions, oranges, [pears, apples], true)).toEqual([fruits]);
   });
