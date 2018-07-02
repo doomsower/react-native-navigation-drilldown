@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { WhitePortal } from 'react-native-portal';
-import { NavigationStackScreenOptions, NavigationTabScreenOptions } from 'react-navigation';
+import { NavigationScreenConfig, NavigationScreenOptions } from 'react-navigation';
 import Icon from './Icon';
 import { CHECK_ICON } from './icons';
 import MultiselectDone from './MultiselectDone';
@@ -16,7 +16,7 @@ export interface DrilldownScreenParams {
 export interface DrilldownScreenOptions {
   HeaderRight?: React.ComponentType;
   screenStyle?: StyleProp<ViewStyle>;
-  navigationOptions?: NavigationStackScreenOptions & NavigationTabScreenOptions;
+  navigationOptions?: NavigationScreenConfig<NavigationScreenOptions>;
 }
 
 const DefaultHeaderRight = () => <Icon source={CHECK_ICON} />;
@@ -44,6 +44,9 @@ export const createDrilldownScreen = (options: DrilldownScreenOptions = {}) => {
     const params = navigation.state.params;
     const rootDrilldownScreenKey = params && params.rootDrilldownScreenKey;
     const multi = !!params && !!params.multi;
+    const navOpts = typeof navigationOptions === 'function' ?
+      navigationOptions({ navigation } as any) :
+      navigationOptions;
     return {
       title: 'Select item',
       headerRight: multi ? (
@@ -54,7 +57,7 @@ export const createDrilldownScreen = (options: DrilldownScreenOptions = {}) => {
           <HeaderRight />
         </MultiselectDone>
       ) : (null as any),
-      ...navigationOptions,
+      ...navOpts,
     };
   };
 
