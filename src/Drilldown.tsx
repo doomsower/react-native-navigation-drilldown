@@ -37,7 +37,7 @@ export class Drilldown extends React.PureComponent<DrilldownProps, any> {
 
   onHandlePress = () => {
     const { multi, name, navigate, routeName = DEFAULT_ROUTE_NAME } = this.props;
-    navigate(routeName, { rootPortalName: name, multi });
+    navigate({ routeName, params: { rootPortalName: name, multi } });
   };
 
   render() {

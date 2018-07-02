@@ -66,7 +66,12 @@ export interface DrilldownBaseProps {
   /**
    * Pass navigate function from react-navigation
    */
-  navigate: (routeName: string, params?: NavigationParams, action?: NavigationAction) => boolean;
+  navigate: (options: {
+    routeName: string
+    params?: any;
+    action?: NavigationAction;
+    key?: string;
+  }) => boolean;
   /**
    * Pass goBack function from react-navigation
    */
